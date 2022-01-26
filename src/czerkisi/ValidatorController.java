@@ -50,23 +50,25 @@ public class ValidatorController implements Initializable {
      */
     @FXML
     private void addLogin() {
-        Entry e = new Entry(emailField.getText(), passwordField.getText());
-        try {
-            database.add(e);
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Success");
-            alert.setHeaderText("Your account has been created");
-            alert.setContentText("Thanks for creating an account");
-            alert.showAndWait();
-        } catch (Database.MalformedEmailException exception){
-            error("Invalid Email Entry", "Your email " +
-                    "does not match the correct email format");
-        } catch (Database.WeakPasswordException exception){
-            error("Weak Password", "Your password must be at least 8 characters long, " +
-                    "contain 1 upper and 1 lower case letter, contain 1 digit and " +
-                    "1 special character");
-        } catch (Database.DuplicateEntryException exception){
-            error("Duplicate Entry", "This email has already been entered");
+        if (!addButton.isDisabled()) {
+            Entry e = new Entry(emailField.getText(), passwordField.getText());
+            try {
+                database.add(e);
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Success");
+                alert.setHeaderText("Your account has been created");
+                alert.setContentText("Thanks for creating an account");
+                alert.showAndWait();
+            } catch (Database.MalformedEmailException exception) {
+                error("Invalid Email Entry", "Your email " +
+                        "does not match the correct email format");
+            } catch (Database.WeakPasswordException exception) {
+                error("Weak Password", "Your password must be at least 8 characters long, " +
+                        "contain 1 upper and 1 lower case letter, contain 1 digit and " +
+                        "1 special character");
+            } catch (Database.DuplicateEntryException exception) {
+                error("Duplicate Entry", "This email has already been entered");
+            }
         }
     }
 

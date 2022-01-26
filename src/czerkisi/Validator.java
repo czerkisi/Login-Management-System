@@ -24,6 +24,7 @@ public class Validator extends Application {
         loader.setLocation(getClass().getResource("Validator.fxml"));
         Parent root = loader.load();
         stage.setScene(new Scene(root));
+        stage.setTitle("Please create an account");
         stage.show();
     }
 
